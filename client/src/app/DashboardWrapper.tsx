@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./(components)/Navbar";
 import Sidebar from "./(components)";
 import StoreProvider, { useAppSelector } from "./redux";
@@ -8,9 +8,26 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed
   );
+  // Usa il hook `useAppSelector` per accedere allo stato globale Redux, in particolare al valore `isSidebarCollapsed`.
+
+  const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+  // Usa il hook `useAppSelector` per accedere allo stato globale Redux, in particolare al valore `isDarkMode`.
+
+  useEffect(() => {
+    if (isDarkMode) {
+      // Se `isDarkMode` è true, aggiunge la classe "dark" al documento HTML.
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.add("light");
+    }
+  }, []);
 
   return (
-    <div className={`light flex bg-gray-50 text-gray-900 w-full min-h-screen`}>
+    <div
+      className={`${
+        isDarkMode ? "dark" : "light"
+      } flex bg-gray-50 text-gray-900 w-full min-h-screen`}
+    >
       <Sidebar />
       <main
         className={`flex flex-col w-full h-full py-7 px-9 bg-gray-50 ${
