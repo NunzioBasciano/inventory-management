@@ -36,7 +36,6 @@ model Sales {
   quantity    Int
   unitPrice   Float
   totalAmount Float
-  // definisce la relazione con Products nello specifico defisce il singolo prodotto venduto
   product     Products @relation(fields: [productId], references: [productId])
 }
 
@@ -60,15 +59,15 @@ model Expenses {
 model SalesSummary {
   salesSummaryId   String   @id
   totalValue       Float
-  chengePercentage Float
+  changePercentage Float?
   date             DateTime
 }
 
-model PurchasesSummary {
-  purchasesSummaryId String   @id
-  totalPurchased     Float
-  chengePercentage   Float
-  date               DateTime
+model PurchaseSummary {
+  purchaseSummaryId String   @id
+  totalPurchased    Float
+  changePercentage  Float?
+  date              DateTime
 }
 
 model ExpenseSummary {
