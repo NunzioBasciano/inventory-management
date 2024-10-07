@@ -51,7 +51,7 @@ const CardExpenseSummary = () => {
         <>
           {/* HEADER */}
           <div>
-            <h2 className="text-lg font-semibold mb-2 px-7 pt-5">
+            <h2 className="text-lg font-semibold pb-2 px-7 pt-5">
               Expense Summary
             </h2>
             <hr />
@@ -60,7 +60,7 @@ const CardExpenseSummary = () => {
           <div className="xl:flex justify-between pr-7">
             {/* CHART */}
             <div className="relative basis-3/5">
-              <ResponsiveContainer width="100%" height={100} className="p-2">
+              <ResponsiveContainer width="100%" height={100} className="p-3">
                 <PieChart>
                   <Pie
                     data={expenseCategories}
@@ -82,7 +82,7 @@ const CardExpenseSummary = () => {
                 </PieChart>
               </ResponsiveContainer>
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center basis-2/5">
-                <span className="font-bold text-xl">
+                <span className="font-bold text-[15px]">
                   ${formattedTotalExpenses}
                 </span>
               </div>
@@ -95,7 +95,7 @@ const CardExpenseSummary = () => {
                   className="flex items-center text-xs"
                 >
                   <span
-                    className="mr-2 w-3 h-3 rounded-full"
+                    className=" mr-2 w-3 h-3 rounded-full"
                     style={{ backgroundColor: colors[index % colors.length] }}
                   ></span>
                   {entry.name}
@@ -107,7 +107,7 @@ const CardExpenseSummary = () => {
           <div>
             <hr />
             {expenseSummary && (
-              <div className="mt-3 flex justify-between items-center px-7 mb-4">
+              <div className="flex justify-between items-center px-7 mb-5">
                 <div className="pt-2">
                   <p className="text-sm">
                     Average:{" "}
