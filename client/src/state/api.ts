@@ -8,6 +8,14 @@ export interface Product {
     stockQuantity: number;
 }
 
+export interface NewProduct {
+
+    name: string;
+    price: number;
+    rating?: number;
+    stockQuantity: number;
+}
+
 export interface SalesSummary {
     salesSummaryId: string;
     totalValue: number;
@@ -43,6 +51,12 @@ export interface DashboardMetrics {
     expenseByCategorySummary: ExpenseByCategorySummary[];
 }
 
+export interface User {
+    UserId: string;
+    name: string;
+    email: string;
+}
+
 export const api = createApi({
     baseQuery: fetchBaseQuery({baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL}),
         // `baseQuery` specifica come verranno effettuate le richieste API.
@@ -52,7 +66,7 @@ export const api = createApi({
     reducerPath: 'api',
         // `reducerPath` è il nome del percorso nel Redux store dove verrà memorizzato lo stato dell'API.
 
-    tagTypes:["DashboardMetrics"],
+    tagTypes:["DashboardMetrics", 'Products', 'Users', 'Expenses'],
         // `tagTypes` è un array che permette di definire dei tag per le invalidazioni delle cache.
     // Attualmente è vuoto, ma può essere utilizzato in futuro per invalidare specifiche parti dello stato.
  
@@ -60,7 +74,30 @@ export const api = createApi({
         getDashboardMetrics: build.query<DashboardMetrics, void>({
             query: () => '/dashboard',            
             providesTags: ['DashboardMetrics']
-        })
+        }),
+        getProducts:build.query<Product[], string |void>({
+            query: (search) => ({
+               url: '/products',
+               params: search ? { search } : {}
+            }),            
+            providesTags: ['Products']
+        }),
+        createProduct: build.mutation<Product, NewProduct>({
+            query: (newProduct) => ({
+               url: '/products',
+               method: 'POST',
+               body: newProduct
+            }),            
+            invalidatesTags: ['Products']
+        }),
+        getUsers: build.query<User[], void>({
+            query: () => '/users',            
+            providesTags: ['Users']
+        }),
+        getExpensesByCategory: build.query<ExpenseByCategorySummary[], void>({
+            query: () => '/expenses',            
+            providesTags: ['Expenses']
+        }),
     }),
         // `endpoints` è una funzione che permette di definire i vari endpoint dell'API.
     // In questo caso è una funzione che restituisce un oggetto vuoto, 
@@ -68,7 +105,7 @@ export const api = createApi({
 });
 
 export const {
-    useGetDashboardMetricsQuery,
+    useGetDashboardMetricsQuery, useGetProductsQuery, useCreateProductMutation, useGetUsersQuery, useGetExpensesByCategoryQuery
     // `useGetDashboardMetricsQuery` è una funzione che permette di ottenere lo stato e le azioni per la richiesta `getDashboardMetrics`.
 } = api;
 
