@@ -51,6 +51,12 @@ export interface DashboardMetrics {
     expenseByCategorySummary: ExpenseByCategorySummary[];
 }
 
+export interface User {
+    UserId: string;
+    name: string;
+    email: string;
+}
+
 export const api = createApi({
     baseQuery: fetchBaseQuery({baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL}),
         // `baseQuery` specifica come verranno effettuate le richieste API.
@@ -60,7 +66,7 @@ export const api = createApi({
     reducerPath: 'api',
         // `reducerPath` è il nome del percorso nel Redux store dove verrà memorizzato lo stato dell'API.
 
-    tagTypes:["DashboardMetrics", 'Products'],
+    tagTypes:["DashboardMetrics", 'Products', 'Users'],
         // `tagTypes` è un array che permette di definire dei tag per le invalidazioni delle cache.
     // Attualmente è vuoto, ma può essere utilizzato in futuro per invalidare specifiche parti dello stato.
  
@@ -84,6 +90,10 @@ export const api = createApi({
             }),            
             invalidatesTags: ['Products']
         }),
+        getUsers: build.query<User[], void>({
+            query: () => '/users',            
+            providesTags: ['Users']
+        }),
     }),
         // `endpoints` è una funzione che permette di definire i vari endpoint dell'API.
     // In questo caso è una funzione che restituisce un oggetto vuoto, 
@@ -91,7 +101,7 @@ export const api = createApi({
 });
 
 export const {
-    useGetDashboardMetricsQuery, useGetProductsQuery, useCreateProductMutation
+    useGetDashboardMetricsQuery, useGetProductsQuery, useCreateProductMutation, useGetUsersQuery
     // `useGetDashboardMetricsQuery` è una funzione che permette di ottenere lo stato e le azioni per la richiesta `getDashboardMetrics`.
 } = api;
 
