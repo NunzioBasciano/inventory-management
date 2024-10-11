@@ -66,7 +66,7 @@ const Navbar = () => {
           <div className="flex items-center gap-3 cursor-pointer">
             <Image
               src={
-                "https://s3-inventory-management-basciano.s3.eu-central-1.amazonaws.com/images/profile.jpg"
+                "https://s3-inventory-management-basciano.s3.eu-central-1.amazonaws.com/profile.jpg"
               }
               alt="Profile"
               width={50}

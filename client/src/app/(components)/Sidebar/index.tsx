@@ -80,7 +80,7 @@ const Sidebar = () => {
       >
         <Image
           src={
-            "https://s3-inventory-management-basciano.s3.eu-central-1.amazonaws.com/images/logo.png"
+            "https://s3-inventory-management-basciano.s3.eu-central-1.amazonaws.com/logo.png"
           }
           alt="logo"
           width={27}
