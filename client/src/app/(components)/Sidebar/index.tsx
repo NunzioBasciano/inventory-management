@@ -9,9 +9,9 @@ import {
   User,
 } from "lucide-react";
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../redux";
+import { useAppDispatch, useAppSelector } from "../../redux";
 import { setIsSidebarCollapsed } from "@/state";
-import { SidebarLink } from "./SidebarLink";
+import { SidebarLink } from "../SidebarLink";
 
 const Sidebar = () => {
   //onsente di inviare azioni per modificare lo stato globale gestito da Redux.
@@ -83,7 +83,7 @@ const Sidebar = () => {
             isSidebarCollapsed ? "hidden" : "block"
           } font-extrabold text-2xl`}
         >
-          NunzioStock
+          Inventory Management
         </h1>
 
         <button
